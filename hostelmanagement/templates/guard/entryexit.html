@@ -1,0 +1,11 @@
+{% extends 'guard/guard_layout.html' %}
+{% block guard_entryexit %}active{% endblock %}
+{% block guard_content %}
+    {% if entryexits %}
+        {% for entryexit in entryexits %}
+            {{entryexit.status}} for {{entryexit.user.firstname}}
+        {% endfor %} 
+    {% endif %}
+
+    <a class="btn" type="submit" href="{{url_for('new_entry_exit_record')}}">Create New Record</a>
+{% endblock guard_content %}

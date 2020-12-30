@@ -1,0 +1,61 @@
+{% extends 'cr/cr_layout.html' %}
+{% block cr_entryexit %}active{% endblock %}
+{% block cr_content %}
+<div class="container col-md-4">
+    {% if entries %}
+    <h4>Entry/Exit Records</h4>
+    <table class=" table table-hover">
+        <thead class='thead-light'>
+            <tr>
+                <th>Type</th>
+                <th>Name</th>
+                <th>Date and Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in entries %}
+            <tr>
+                <td>{{entry.status}}</td>
+                <td>{{entry.user.firstname}}</td>
+                <td>{{entry.datetime.strftime('%d-%m-%Y %H:%M:%S') }}</td>
+            </tr> 
+        {% endfor %}
+        </tbody>
+        
+    </table>
+        
+    {% else %}
+        <h3>No Entries Yet</h3>
+    {% endif %}
+</div>
+
+<div class="container col-md-6">
+    {% if visitors %}
+    <h4>Visitor Records</h4>
+    <table class=" table table-hover">
+        <thead class='thead-light'>
+            <tr>
+                <th>Name</th>
+                <th>Visited</th>
+                <th>Entry/Exit</th>
+                <th>Date and Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for visitor in visitors %}
+            <tr>
+                <td>{{visitor.name}}</td>
+                <td>{{visitor.user.firstname}}</td>
+                <td>{{visitor.status}}</td>
+                <td>{{entry.datetime.strftime('%d-%m-%Y %H:%M:%S') }}</td>
+            </tr> 
+        {% endfor %}
+        </tbody>
+        
+    </table>
+   
+    {% else %}
+        <h3>No Entries Yet</h3>
+    {% endif %}
+</div>
+{% endblock %}

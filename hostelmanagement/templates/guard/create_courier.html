@@ -1,0 +1,38 @@
+{% extends 'guard/guard_layout.html' %}
+{% block guard_content %}
+    <div class="container">
+        <form action="" method='POST'>
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4 mt-4 font-weight-bold">Courier Entry</legend>
+                <div class='row'>
+
+                <div class='col-md-6'>
+                <div class="form-group">
+                    {{ form.from_name.label(class="form-control-label") }}
+                    {{ form.from_name(class="form-control form-control-lg") }}
+                </div>
+                </div>
+                
+                <div class="col-md-6">
+                <div class="form-group">
+                    {{ form.student_college_id.label(class="form-control-label") }}
+                    {{ form.student_college_id(class="form-control form-control-lg") }}
+                </div>
+                </div>
+                
+                <div class="col-12">
+                <div class="form-group">
+                    {{ form.status.label(class="form-control-label") }}
+                    {{ form.status(class="form-control form-control-lg") }}
+                </div>
+                </div>
+
+                </div>
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+        </form>
+    </div>
+{% endblock %}

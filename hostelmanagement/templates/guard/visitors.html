@@ -1,0 +1,11 @@
+{% extends 'guard/guard_layout.html' %}
+{% block guard_visitors %}active{% endblock %}
+{% block guard_content %}
+    {% if visitors %}
+        {% for visitor in visitors %}
+            {{visitor.name}} for {{visitor.for_user_id}}
+        {% endfor %} 
+    {% endif %}
+
+    <a class="btn" href="{{url_for('new_visitor_record')}}">Create New Record</a>
+{% endblock guard_content %}

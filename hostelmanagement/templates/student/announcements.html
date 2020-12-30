@@ -1,0 +1,28 @@
+{% extends 'student/students_layout.html' %}
+{% block student_announcements %}active{% endblock student_announcements %}
+{% block student_content %}
+<style>
+    .card{
+        padding: 2%;
+    }
+</style>
+    <div class="container" style="padding: 0 10%;">
+        {% if announcements %}
+        {% for announcement in announcements %}
+            <div class="card">
+                <h4>{{announcement.title}}</h4>
+                <p style="color: black">Author: {{announcement.author.firstname}} {{announcement.author.lastname}}</p>
+                <p style="color: black;">{{announcement.content}}</p>
+                <p style="float: right;">{{announcement.date_posted}}</p>
+                
+
+            </div>
+            <hr>
+        {% endfor %}
+    {% else %}
+        <h2>No Announcements</h2>
+    {% endif %}
+
+
+    </div>
+{% endblock student_content %}

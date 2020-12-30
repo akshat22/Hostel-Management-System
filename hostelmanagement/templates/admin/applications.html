@@ -1,0 +1,25 @@
+{% extends 'admin/admin_layout.html' %}
+{% block admin_applications %}active{% endblock %}
+{% block admin_content %}
+
+    <h3>Pending Applications</h3>
+        {% if pending_apps %}
+            {% for pending_app in pending_apps %}
+                <a href="{{ url_for('individual_applications', id=pending_app.id) }}">
+                    <h4>{{pending_app.firstname}} {{pending_app.lastname}}</h4>
+                </a>
+            {% endfor %}
+        {% else %}
+            <h3>No Pending Applications</h3>  
+        {% endif %}
+        <br>
+    <h3>Confirmed Applications</h3>
+
+        {% if confirmed_apps %}
+            {% for confirmed_app in confirmed_apps %}
+                <h4>{{confirmed_app.firstname}} {{confirmed_app.lastname}}</h4>
+            {% endfor %}
+        {% else %}
+            <h3>No Confirmed Applications</h3>  
+        {% endif %}
+{% endblock admin_content%}

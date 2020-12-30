@@ -1,0 +1,28 @@
+{% extends 'student/students_layout.html' %}
+{% block student_complaints %}active{% endblock student_complaints %}
+{% block student_content %}
+    <style>
+        .card{
+            padding: 2%;
+        }
+    </style>
+        <div class="container" style="padding: 0 10%;">
+            {% if complaints %}
+            {% for complaint in complaints %}
+                <div class="card">
+                    <h4>{{complaint.title}}</h4>
+                    <p style="color: black">Author: {{complaint.author.firstname}} {{complaint.author.lastname}}</p>
+                    <p style="color: black;">{{complaint.content}}</p>
+                    <p style="float: right;">Status: {{complaint.status}}</p>
+                    
+    
+                </div>
+                <hr>
+            {% endfor %}
+        {% else %}
+            <h2>No complaints</h2>
+        {% endif %}
+                <a class="btn btn-primary" href="{{url_for('new_complaint')}}">Post new complaint</a>
+        </div>
+
+{% endblock %}

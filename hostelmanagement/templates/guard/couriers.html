@@ -1,0 +1,11 @@
+{% extends 'guard/guard_layout.html' %}
+{% block guard_couriers %}active{% endblock %}
+{% block guard_content %}
+    {% if couriers %}
+        {% for courier in couriers %}
+            {{courier.user_id}} from {{courier.from_name}} {{ courier.status }}
+        {% endfor %} 
+    {% endif %}
+
+    <a class="btn" href="{{url_for('new_courier_record')}}">Create New Record</a>
+{% endblock

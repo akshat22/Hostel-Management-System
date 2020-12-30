@@ -1,0 +1,57 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+
+    <style>
+        .navbar{
+            margin-bottom: 0px!important;
+        }
+    </style>
+
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>VJTI-Hostel</h3>
+            </div>
+
+            <ul class="list-unstyled components">
+                <li class="{% block cr_update %}{% endblock %}">
+                    <a href="{{ url_for('update_cr_account') }}">Update Profile</a>
+                </li>
+                <li class="{% block cr_announcements %}{% endblock %}">
+                    <a href="{{ url_for('display_announcements') }}">Announcements</a>
+                </li>
+                <li class="{% block cr_couriers %}{% endblock %}">
+                    <a href="{{ url_for('display_cr_couriers') }}">Couriers</a>
+                </li>
+                <li class="{% block cr_entryexit %}{% endblock %}">
+                    <a href="{{ url_for('display_cr_entry_exits') }}">Exits-Entries</a>
+                </li>
+                <li class="{% block cr_complaints %}{% endblock %}">
+                    <a href="{{url_for('display_cr_complaints')}}">Complaints</a>
+                </li>
+                <li class="{% block cr_menu %}{% endblock %}">
+                    <a href="{{ url_for('cr_mess_menu') }}">Mess Menu</a>
+                </li>
+            </ul>
+            <ul class="list-unstyled CTAs">
+                <li>
+                    <a href="{{ url_for('logout') }}" class="download">Logout</a>
+                </li>
+            </ul>
+        </nav>
+
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+    {% block cr_content %}
+    {% endblock cr_content %}
+{% endblock content %}

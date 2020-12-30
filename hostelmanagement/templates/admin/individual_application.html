@@ -1,0 +1,8 @@
+{% extends 'admin/admin_layout.html' %}
+{% block admin_content %}
+    {{ application.id }} {{application.firstname}} {{application.lastname}}
+    <form action="", method="POST">
+        <button type="submit" class="btn btn-primary btn-md">Allot</button>
+    </form>
+{% endblock admin_content %}
+    

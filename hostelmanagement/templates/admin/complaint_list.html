@@ -1,0 +1,38 @@
+{% extends 'admin/admin_layout.html' %}
+{% block admin_complaints %}active{% endblock %}
+{% block admin_content %}
+<style>
+    .card{
+        padding: 2%;
+    }
+</style>
+    <div class="container" style="padding: 0 10%;">
+        {% if complaints %}
+        {% for complaint in complaints %}
+            <div class="card">
+                <h4>{{complaint.title}}</h4>
+                <p style="color: black">Author: {{complaint.author.firstname}} {{complaint.author.lastname}}</p>
+                <p style="color: black;">{{complaint.content}}</p>
+                <p>Status: {{complaint.status}}</p>
+               <a><button id="myDIV" onclick="myFunction()" type="submit" href="{{ url_for('complaint_status', complaint=complaint.id) }}">Resolve</button></a>
+
+            </div>
+            <hr>
+        {% endfor %}
+    {% else %}
+        <h2>No complaints</h2>
+    {% endif %}
+
+    </div>
+    <script>
+        function myFunction() {
+          var x = document.getElementById("myDIV");
+          if (x.innerHTML === "Resolve") {
+            x.innerHTML = "Unresolve";
+          } else {
+            x.innerHTML = "Resolve";
+          }
+        }
+        </script>
+
+{% endblock admin_content %}

@@ -1,0 +1,27 @@
+{% extends 'admin/admin_layout.html' %}
+{% block admin_students %}active{% endblock %}
+{% block admin_content %}
+    
+    {% if users %}
+
+        
+        {% for user in users %}
+        <div class="media">
+            <div class="media-body">
+              <h2 class="account-heading">{{ user.firstname}} {{ user.lastname }}</h2>
+              <p class="text-secondary">{{ user.email }} {{ user.college_id }}</p>
+            </div>
+
+            <div> <a href="{{ url_for('student_update', id=user.id) }}"><button type="submit">Update</button></a> </div>
+            <form action="{{ url_for('student_delete', id=user.id) }}" method="POST">
+                <input class="btn btn-danger" type="submit" value="Delete">
+            </form>
+          </div>
+
+        {% endfor %}
+        
+        <a href="{{ url_for('student_create') }}"><button type="submit">Create</button></a>
+
+    {% endif %}
+
+{% endblock admin_content %}

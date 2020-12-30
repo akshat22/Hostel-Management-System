@@ -1,0 +1,51 @@
+{% extends 'guard/guard_layout.html' %}
+{% block guard_content %}
+    <form action="" method='POST'>
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Visitor's Entry</legend>
+
+                <div class="row">
+                <div class="col-md-6">
+                <div class="form-group">
+                    {{ form.name.label(class="form-control-label") }}
+                    {{ form.name(class="form-control form-control-lg") }}
+                </div>
+                </div>
+
+                <div class="col-md-6">
+                <div class="form-group">
+                    {{ form.student_college_id.label(class="form-control-label") }}
+                    {{ form.student_college_id(class="form-control form-control-lg") }}
+                </div>
+                </div>
+
+                <div class="col-md-6">
+                <div class="form-group">
+                    {{ form.room_no.label(class="form-control-label") }}
+                    {{ form.room_no(class="form-control form-control-lg") }}
+                </div>
+                </div>
+
+                <div class="col-md-6">
+                <div class="form-group">
+                    {{ form.hostel_block.label(class="form-control-label") }}
+                    {{ form.hostel_block(class="form-control form-control-lg") }}
+                </div>
+                </div>
+
+                <div class="col-12">
+                <div class="form-group">
+                    {{ form.entryexit.label(class="form-control-label") }}
+                    {{ form.entryexit(class="form-control form-control-lg") }}
+                </div>
+                </div>
+
+                </div>
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+        </form>
+    </div>
+{% endblock %}

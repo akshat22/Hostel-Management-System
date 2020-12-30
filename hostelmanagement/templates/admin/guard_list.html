@@ -1,0 +1,26 @@
+{% extends 'admin/admin_layout.html' %}
+{% block admin_guards %}active{% endblock %}
+{% block admin_content %}
+    
+    {% if users %}
+
+        
+        {% for user in users %}
+        <div class="card">
+              <h2 class="account-heading">{{ user.firstname}} {{ user.lastname }}</h2>
+              <p class="text-secondary">{{ user.email }} {{ user.college_id }}</p>
+         
+
+            <div> <a type="submit" class="btn btn-warning" href="{{ url_for('guard_update', id=user.id) }}">Update</a> </div>
+            <form action="{{ url_for('guard_delete', id=user.id) }}" method="POST">
+                <input class="btn btn-danger" type="submit" value="Delete">
+            </form>
+          </div>
+
+        {% endfor %}
+        
+        
+
+    {% endif %}
+    <a class="btn btn-primary" type="submit" href="{{ url_for('guard_create') }}">Create</a>
+{% endblock admin_content %}
