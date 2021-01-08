@@ -14,7 +14,7 @@
                 <p style="color: black">Author: {{complaint.author.firstname}} {{complaint.author.lastname}}</p>
                 <p style="color: black;">{{complaint.content}}</p>
                 <p>Status: {{complaint.status}}</p>
-               <a><button id="myDIV" onclick="myFunction()" type="submit" href="{{ url_for('complaint_status', complaint=complaint.id) }}">Resolve</button></a>
+               <a href="{{ url_for('complaint_status', complaints=complaint.id) }}"><button class="myDIV" type="submit" >Toggle Status</button></a>
 
             </div>
             <hr>
@@ -26,7 +26,7 @@
     </div>
     <script>
         function myFunction() {
-          var x = document.getElementById("myDIV");
+          var x = document.getElementByClass("myDIV");
           if (x.innerHTML === "Resolve") {
             x.innerHTML = "Unresolve";
           } else {

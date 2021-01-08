@@ -5,12 +5,22 @@ from flask_login import LoginManager
 from flask_mail import Mail, Message
 
 app = Flask(__name__)
-app.config['MAIL_SERVER']='smtp.gmail.com'
-app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = 'miriummaisel@gmail.com'
-app.config['MAIL_PASSWORD'] = 'midge@ny'
-app.config['MAIL_USE_TLS'] = False
-app.config['MAIL_USE_SSL'] = True
+app.config.update(
+	DEBUG=True,
+	#EMAIL SETTINGS
+	MAIL_SERVER='smtp.gmail.com',
+	MAIL_PORT=465,
+	MAIL_USE_SSL=True,
+	MAIL_USERNAME = 'harshildoshi6333@gmail.com',
+	MAIL_PASSWORD = 'harshil007'
+	)
+
+# app.config['MAIL_SERVER']='smtp.gmail.com'
+# app.config['MAIL_PORT'] = 465
+# app.config['MAIL_USERNAME'] = 'miriummaisel@gmail.com'
+# app.config['MAIL_PASSWORD'] = 'midge@ny'
+# app.config['MAIL_USE_TLS'] = False
+# app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
 
 app.config['SECRET_KEY'] = 'secret key'

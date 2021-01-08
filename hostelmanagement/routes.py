@@ -8,6 +8,7 @@ from flask_mail import Mail, Message
 import datetime
 import os
 import secrets
+import string, random
 from PIL import Image
 
 @app.route("/")
@@ -82,6 +83,13 @@ def application():
                             income = form.income.data, email=form.email.data)
         db.session.add(application)
         db.session.commit()
+
+        msg = Message("Send Mail Tutorial!",
+                sender="harshildoshi6333@gmail.com",
+                recipients=["akshat000822@gmail.com"])
+        msg.body = "Yo!\nHave you heard the good word of Python???"           
+        mail.send(msg)
+        print("Mail sent")
         flash('You have applied to the Hostel. Please keep checking your email inbox for further updates.', 'success')
         return redirect(url_for('index'))
     return render_template('account/apply.html', title='Application', form=form)
@@ -139,15 +147,23 @@ def display_entry_exits():
 def update_account():
     form = UpdateAccountForm()
     if form.validate_on_submit():
-        current_user.email = form.email.data
-        current_user.phone = form.phone.data
-        current_user.address = form.address.data
+        
         if form.password.data and form.confirm_password.data:
+            current_user.email = form.email.data
+            current_user.phone = form.phone.data
+            current_user.address = form.address.data
             hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
             current_user.password = hashed_password
-        db.session.commit()
-        flash('Your account has been updated!', 'success')
-        return redirect(url_for('update_account'))
+            db.session.commit()
+            flash('Password changed! Login with new password.', 'success')
+            return redirect(url_for('logout'))
+        else:
+            current_user.email = form.email.data
+            current_user.phone = form.phone.data
+            current_user.address = form.address.data
+            db.session.commit()
+            flash('Your account has been updated!', 'success')
+            return redirect(url_for('update_account'))
     elif request.method == 'GET':
         form.email.data = current_user.email
         form.address.data = current_user.address
@@ -194,6 +210,7 @@ def update_menu(id):
     if form.validate_on_submit():
         messMenu.type_of_meal = form.type_of_meal.data
         messMenu.menu = form.menu.data
+        messMenu.date_posted = datetime.datetime.now()
         if form.image.data:
             picture_file = save_picture(form.image.data)
             messMenu.image = picture_file
@@ -211,15 +228,22 @@ def update_menu(id):
 def update_mess_account():
     form = UpdateAccountForm()
     if form.validate_on_submit():
-        current_user.email = form.email.data
-        current_user.phone = form.phone.data
-        current_user.address = form.address.data
         if form.password.data and form.confirm_password.data:
+            current_user.email = form.email.data
+            current_user.phone = form.phone.data
+            current_user.address = form.address.data
             hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
             current_user.password = hashed_password
-        db.session.commit()
-        flash('Your account has been updated!', 'success')
-        return redirect(url_for('update_mess_account'))
+            db.session.commit()
+            flash('Password changed! Login with new password.', 'success')
+            return redirect(url_for('logout'))
+        else:
+            current_user.email = form.email.data
+            current_user.phone = form.phone.data
+            current_user.address = form.address.data
+            db.session.commit()
+            flash('Your account has been updated!', 'success')
+            return redirect(url_for('update_mess_account'))
     elif request.method == 'GET':
         form.email.data = current_user.email
         form.address.data = current_user.address
@@ -327,15 +351,22 @@ def display_cr_entry_exits():
 def update_cr_account():
     form = UpdateAccountForm()
     if form.validate_on_submit():
-        current_user.email = form.email.data
-        current_user.phone = form.phone.data
-        current_user.address = form.address.data
         if form.password.data and form.confirm_password.data:
+            current_user.email = form.email.data
+            current_user.phone = form.phone.data
+            current_user.address = form.address.data
             hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
             current_user.password = hashed_password
-        db.session.commit()
-        flash('Your account has been updated!', 'success')
-        return redirect(url_for('update_cr_account'))
+            db.session.commit()
+            flash('Password changed! Login with new password.', 'success')
+            return redirect(url_for('logout'))
+        else:
+            current_user.email = form.email.data
+            current_user.phone = form.phone.data
+            current_user.address = form.address.data
+            db.session.commit()
+            flash('Your account has been updated!', 'success')
+            return redirect(url_for('update_cr_account'))
     elif request.method == 'GET':
         form.email.data = current_user.email
         form.address.data = current_user.address
@@ -418,15 +449,22 @@ def new_courier_record():
 def update_guard_account():
     form = UpdateAccountForm()
     if form.validate_on_submit():
-        current_user.email = form.email.data
-        current_user.phone = form.phone.data
-        current_user.address = form.address.data
         if form.password.data and form.confirm_password.data:
+            current_user.email = form.email.data
+            current_user.phone = form.phone.data
+            current_user.address = form.address.data
             hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
             current_user.password = hashed_password
-        db.session.commit()
-        flash('Your account has been updated!', 'success')
-        return redirect(url_for('update_guard_account'))
+            db.session.commit()
+            flash('Password changed! Login with new password.', 'success')
+            return redirect(url_for('logout'))
+        else:
+            current_user.email = form.email.data
+            current_user.phone = form.phone.data
+            current_user.address = form.address.data
+            db.session.commit()
+            flash('Your account has been updated!', 'success')
+            return redirect(url_for('update_guard_account'))
     elif request.method == 'GET':
         form.email.data = current_user.email
         form.address.data = current_user.address
@@ -450,7 +488,8 @@ def individual_applications(id):
         room = Room.query.filter(Room.capacity>0).order_by(Room.capacity).first()
         if room:
             application = Application.query.get_or_404(id)
-            hashed_password = bcrypt.generate_password_hash('password').decode('utf-8')
+            password = ''.join(random.choices(string.ascii_uppercase + string.digits, k = 8))
+            hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
             user = User(college_id=application.college_id,firstname=application.firstname,lastname=application.lastname,
             email=application.email,password=hashed_password,phone=application.phone,address=application.address,course=application.course,department=application.department)
 
@@ -458,7 +497,7 @@ def individual_applications(id):
             application.status=1
             user.room_no = room.room_no
             db.session.add(user)
-            # db.session.commit()
+            db.session.commit()
 
             user = User.query.filter_by(college_id=application.college_id).first()
             if not room.student1_id:
@@ -471,6 +510,13 @@ def individual_applications(id):
                 room.student3_id = user.id
 
             db.session.commit()
+
+
+            msg = Message("Password for HosteLite",
+                sender="harshildoshi6333@gmail.com",
+                recipients=["akshat000822@gmail.com"])
+            msg.body = "The password for your hostelite account is: "  + password + "\nPlease reset your password as soon as you login."      
+            mail.send(msg)
         return redirect(url_for('display_applications'))
 
     application = Application.query.get_or_404(id)
@@ -546,16 +592,33 @@ def student_delete(id):
     visitors = Visitor.query.filter_by(for_user_id = id).delete()
     room = Room.query.filter_by(room_no = user.room_no).first()
 
+    print("Before Removing student from room:")
+    print(room.student1_id)
+    print(room.student2_id)
+    print(room.student3_id)
+    
     if room.student1_id == id:
         room.student1_id = None
     elif room.student2_id == id:
         room.student2_id = None
     elif room.student3_id == id:
         room.student3_id = None
-    
+
+    print("After Removing student from room:")    
+    print(room.student1_id)
+    print(room.student2_id)
+    print(room.student3_id)
+
     db.session.delete(user)
     room.capacity += 1
     db.session.commit()
+    
+    room = Room.query.filter_by(room_no = user.room_no).first()
+    print("After changing capacity:")
+    print(room.student1_id)
+    print(room.student2_id)
+    print(room.student3_id)
+    print(room.capacity)
     flash('User successfully Deleted!', 'success')
     return redirect(url_for('student_list'))
     
@@ -573,12 +636,18 @@ def messstaff_create():
 
     form = CreateMessStaffForm()
     if form.validate_on_submit():
-        password = bcrypt.generate_password_hash('password').decode('utf-8')
+        password = ''.join(random.choices(string.ascii_uppercase + string.digits, k = 8))
+        hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
         user = User(firstname = form.firstname.data, lastname = form.lastname.data,
                             college_id = form.college_id.data, phone = form.phone.data,
-                            address = form.address.data, email=form.email.data,password=password,user_type=3)
+                            address = form.address.data, email=form.email.data,password=hashed_password,user_type=3)
         db.session.add(user)
         db.session.commit()
+        msg = Message("Password for HosteLite",
+                sender="harshildoshi6333@gmail.com",
+                recipients=["akshat000822@gmail.com"])
+        msg.body = "The password for your hostelite account is: "  + password + "\nPlease reset your password as soon as you login."      
+        mail.send(msg)
         flash('Account created successfully.', 'success')
         return redirect(url_for('messstaff_list'))
         
@@ -641,12 +710,18 @@ def cr_create():
 
     form = CreateMessStaffForm()
     if form.validate_on_submit():
-        password = bcrypt.generate_password_hash('password').decode('utf-8')
+        password = ''.join(random.choices(string.ascii_uppercase + string.digits, k = 8))
+        hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
         user = User(firstname = form.firstname.data, lastname = form.lastname.data,
                             college_id = form.college_id.data, phone = form.phone.data,
-                            address = form.address.data, email=form.email.data,password=password,user_type=4)
+                            address = form.address.data, email=form.email.data,password=hashed_password,user_type=4)
         db.session.add(user)
         db.session.commit()
+        msg = Message("Password for HosteLite",
+                sender="harshildoshi6333@gmail.com",
+                recipients=["akshat000822@gmail.com"])
+        msg.body = "The password for your hostelite account is: "  + password + "\nPlease reset your password as soon as you login."      
+        mail.send(msg)
         flash('Account created successfully.', 'success')        
         return redirect(url_for('cr_list'))
         
@@ -709,12 +784,18 @@ def guard_create():
 
     form = CreateMessStaffForm()
     if form.validate_on_submit():
-        password = bcrypt.generate_password_hash('password').decode('utf-8')
+        password = ''.join(random.choices(string.ascii_uppercase + string.digits, k = 8))
+        hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
         user = User(firstname = form.firstname.data, lastname = form.lastname.data,
                             college_id = form.college_id.data, phone = form.phone.data,
                             address = form.address.data, email=form.email.data,password=password,user_type=2)
         db.session.add(user)
         db.session.commit()
+        msg = Message("Password for HosteLite",
+                sender="harshildoshi6333@gmail.com",
+                recipients=["akshat000822@gmail.com"])
+        msg.body = "The password for your hostelite account is: "  + password + "\nPlease reset your password as soon as you login."      
+        mail.send(msg)
         flash('Account created successfully.', 'success')
 
         return redirect(url_for('guard_list'))
@@ -773,18 +854,21 @@ def complaint_list():
 
 
 
-@app.route("/admin/complaints/<int:complaint>/status", methods=['GET','POST'])
+@app.route("/admin/complaints/<int:complaints>/status", methods=['GET','POST'])
 @login_required
-def complaint_status(complaint):
-    complaint = Complaint.query.get_or_404(complaint)
+def complaint_status(complaints):
+    complaint = Complaint.query.get_or_404(complaints)
     status = complaint.status
     if status == 'Unresolved':
         complaint.status = "Resolved"
     else:
         complaint.status = "Unresolved"
 
+    print(complaint.status)
     db.session.commit()
-    return redirect(url_for('complaint_list', complaint_status=complaint.status))
+    complaint = Complaint.query.get_or_404(complaints)
+    print(complaint.status)
+    return redirect(url_for('complaint_list'))
 
 @app.route("/admin/announcements")
 @login_required
