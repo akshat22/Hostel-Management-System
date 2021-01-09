@@ -1,31 +1,24 @@
 {% extends '/student/students_layout.html' %}
 {% block student_mess_menu %}active{% endblock student_mess_menu %}
 {% block student_content %}
-<style>
-    .card{
-        margin: 0 6%;
-    }
-</style>
 
+    <h1 style="text-align: center; padding-top: 20px;">Mess Menu</h1><br>
+    <div class="card-deck grid-mess">
 
-    {% if messMenu %}
-        <div class="container">
-            <h1>Mess Menu</h1><br>
-            {% for item in messMenu %}
-            <div class="card" style="padding: 2%">
-            <div class="row">
-                <div class="col-md-5">
-                <h3>{{item.type_of_meal}}</h3>
-                <p  style="color: black">{{item.menu}}</p>
-                <p  style="color: black">{{item.date_posted}}</p>
+        {% for item in messMenu %}
+            <div class="card-mess">
+                <div class="card-header">
+                    <h3 style="text-align: center;" class="card-title">{{ item.type_of_meal }}</h3>
                 </div>
-                <div class="col-md-5"><img width=80% height=80% src="{{ url_for('static', filename='menu_pics/' + item.image) }}" alt="food"></div>
+                <div class="card-body" style="padding-top: 0px;">                    
+                    
+                    <p style="text-align: right;"><small>Date: {{item.date_posted.strftime('%d-%m-%Y')}}</small></p>
+                    <p style="color: black; text-align: center;">{{item.menu}}</p>
+                </div>
+                <div style="margin:auto;" class="col-md-5"><img width=125px height=125px src="{{ url_for('static', filename='menu_pics/' + item.image) }}" alt="food"></div>
             </div>
-            </div>
-            <br>
-
         {% endfor %}
-        </div>
-    {% else %}
-    {% endif %}
+
+    </div>
+
 {% endblock %}

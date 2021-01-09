@@ -1,12 +1,47 @@
 {% extends "layout.html" %}
 {% block content %}
+    <style>
+
+        .form-signin {
+            width: 100%;
+            max-width: 330px;
+            padding: 15px;
+            margin: 0 auto;
+        }
+
+        .form-signin .form-control {
+            position: relative;
+            box-sizing: border-box;
+            height: auto;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .form-signin .form-control:focus {
+            z-index: 2;
+        }
+
+        .form-signin input[type="email"] {
+            margin-bottom: -1px;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        .form-signin input[type="password"] {
+            margin-bottom: 10px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+
+    </style>
     <section id="loginPage">
-    <div class="container">
+    <div class="text-center">
         <div class="loginForm">
-        <form method="POST" action="">
+        <form method="POST" action="" class="form-signin">
             {{ form.hidden_tag() }}
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4 mt-4 font-weight-bold">Log In</legend>
+                <img class="mt-4" src="https://cdn.logo.com/hotlink-ok/logo-social.png" alt="" width="172" height="172">
+                <h3 class="h3 mb-3 font-weight-bold">Please sign in</h3>
                 <div class="form-group">
                     {{ form.email.label(class="form-control-label") }}
                     {% if form.email.errors %}
@@ -46,11 +81,11 @@
             </small>
         </form>
         </div>
-        <div class="border-top pt-3">
-        <small class="text-muted">
-            Need An Account? <a class="ml-2" href="{{ url_for('application') }}">Apply Now</a>
-        </small>
-    </div>
+        <div class="border-top pt-3 ml-auto mr-auto" style="width: 40%;">
+            <small class="text-muted">
+                Need An Account? <a class="ml-2" href="{{ url_for('application') }}">Apply Now</a>
+            </small>
+        </div>
     </div>
     </section>
 {% endblock content %}

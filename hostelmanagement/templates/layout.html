@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
     <link rel='stylesheet' href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
     {% if title %}
         <title>Hostel Management - {{ title }}</title>
     {% else %}
@@ -17,88 +19,70 @@
 <body>
     
     <section id="landingPage">
-        <header id="header">
-            <nav class="navbar navbar-expand-lg navbar-light" id="navBar" style="background-color: transparent">
-            <div class="container">
-                <a class="navbar-brand" href="{{url_for('index')}}">
-                    <img src="https://cdn.logo.com/hotlink-ok/logo-social.png" width="70" height="40" class="d-inline-block align-top" alt="" loading="lazy">
-                    HosteLite
-                </a>
-    
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-    
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!--<ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Contact</a>
-                        </li>
-                    </ul>-->
-    
-                    {% if not current_user.is_authenticated %}
-                        <ul class='navbar-nav ml-auto'> 
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ url_for('about') }}">About</a>
-                            </li>
-    
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ url_for('contact') }}">Contact</a>
-                            </li> 
-    
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ url_for('login') }}">Log In</a>
-                            </li>
-    
-                            <li class="nav-item">
-                                <a class="nav-link toButton pl-15 pr-15" style="color: white; font-weight: 600" href="{{ url_for('application') }}">Apply Now</a>
-                            </li>
-                        </ul>
-                    {% else %}
-                        <ul class='navbar-nav ml-auto'> 
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ url_for('about') }}">About</a>
-                            </li>
-    
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ url_for('contact') }}">Contact</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ url_for('dashboard_mapping') }}">Dashboard</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link toButton pl-15 pr-15" style="color: white; font-weight: 600" href="{{ url_for('logout') }}">Logout</a>
-                            </li>
-                        </ul>
-                    {% endif %}
-                </div>
-    
-            </div>
-            </nav>
-        </header>
-        </section>
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                <div class="container">
-                    {% for category, message in messages %}
-                    <div class="alert alert-{{ category }}">
-                        {{ message }}
-                    </div>
-                    {% endfor %}
-                </div>
-            {% endif %}
-        {% endwith %}
-        {% block content %}
-        {% endblock %}
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+        <nav class="navbar sticky-top shadow navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand col-md-3 col-lg-2 mr-0 pl-0 pr-0" href="{{url_for('index')}}">
+                <img src="https://cdn.logo.com/hotlink-ok/logo-social.png" width="70" height="40" class="d-inline-block align-top" alt="" loading="lazy">
+                <strong class="pl-2 mt-2" style="font-size:1.2em;">HosteLite</strong>
+            </a>
+
+            <ul class='navbar-nav ml-auto mr-2'> 
+                <!-- <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('about') }}">About</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('contact') }}">Contact</a>
+                </li> -->
+
+                {% if not current_user.is_authenticated %}
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('about') }}">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('contact') }}">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('login') }}">Log In</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link toButton pl-15 pr-15" style="color: white; font-weight: 600" href="{{ url_for('application') }}">Apply Now</a>
+                    </li>
+                    
+                {% else %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Hi, {{ current_user.firstname }}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ url_for('dashboard_mapping') }}">Dashboard</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{ url_for('logout') }}">Logout</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('about') }}">About</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('contact') }}">Contact</a>
+                    </li>
+
+                {% endif %}
+            </ul>
+        </nav>
+    </section>
         
-        <!-- Popper.JS -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-        <!-- Bootstrap JS -->
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    {% block content %}
+    {% endblock %}
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>    
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 </body>
 </html>

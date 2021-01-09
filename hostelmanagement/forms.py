@@ -9,7 +9,7 @@ class ApplicationForm(FlaskForm):
     city_choices = [('From Mumbai', 'From Mumbai'), ('Outside Mumbai', 'Outside Mumbai')]
     course_choices = [('Diploma', 'Diploma'), ('B.Tech', 'B.Tech'), ('M.Tech', 'M.Tech')]
     dept_choices = [('CS','Computer Science'), ('IT','Information Technology'), ('Electronics','Electronics')]
-    college_id = IntegerField('College ID', validators=[DataRequired(), NumberRange(min=170000000, max=209999999, message="Enter a valid college-id")])
+    college_id = IntegerField('College ID', validators=[DataRequired(), NumberRange(min=170000000, max=209999999, message="Enter a valid college-id")], render_kw={'autofocus': True})
     firstname = StringField('Firstname', validators=[DataRequired(), Length(min=2, max=20)])
     lastname = StringField('Lastname', validators=[DataRequired(), Length(min=2, max=20)])
     address = TextAreaField('Address', validators=[DataRequired(), Length(min=2, max=200)])
@@ -47,24 +47,24 @@ class AnnouncementForm(FlaskForm):
     submit = SubmitField('Announce')
 
 class ComplaintForm(FlaskForm):
-    title = StringField('Title', validators=[DataRequired(), Length(min=2, max=20)])
+    title = StringField('Title', validators=[DataRequired(), Length(min=2, max=20)], render_kw={'autofocus': True})
     content = TextAreaField('Content', validators=[DataRequired(), Length(min=10)])
     submit = SubmitField('Post Complaint')
 
 class MessMenuForm(FlaskForm):
     choices = [('Breakfast', 'Breakfast'), ('Lunch', 'Lunch'), ('Dinner', 'Dinner')]
-    type_of_meal = SelectField('Type of Meal', choices = choices, validators = [DataRequired()])
+    type_of_meal = SelectField('Type of Meal', choices = choices, validators = [DataRequired()], render_kw={'autofocus': True})
     menu = TextAreaField('Menu', validators=[DataRequired(), Length(min=10)])
     image = FileField('Image File', validators=[FileAllowed(['jpg','jpeg','png'])])
     submit = SubmitField('Post Menu')
 
 class ExitEntryForm(FlaskForm):
-    student_college_id = IntegerField('Student College ID', validators=[DataRequired()])
+    student_college_id = IntegerField('Student College ID', validators=[DataRequired()], render_kw={'autofocus': True})
     entryexit = SelectField('Entry/Exit', choices = [(1, 'Entry'),(0, 'Exit')], validators = [DataRequired()])
     submit = SubmitField('Enter Record')
 
 class VisitorsForm(FlaskForm):
-    name = StringField("Visitor's Name", validators = [DataRequired(), Length(min = 3, max = 10)])
+    name = StringField("Visitor's Name", validators = [DataRequired(), Length(min = 3, max = 10)], render_kw={'autofocus': True})
     student_college_id = IntegerField('For Student College ID', validators=[DataRequired()])
     room_no = IntegerField('Room no.', validators=[DataRequired()])
     hostel_block = StringField('Hostel Block', validators = [DataRequired(), Length(min = 1, max = 1)])
@@ -72,7 +72,7 @@ class VisitorsForm(FlaskForm):
     submit = SubmitField('Enter Record')
 
 class CouriersForm(FlaskForm):
-    from_name = StringField("Sender's Name", validators = [DataRequired(), Length(min = 3, max = 10)])
+    from_name = StringField("Sender's Name", validators = [DataRequired(), Length(min = 3, max = 10)], render_kw={'autofocus': True})
     student_college_id = IntegerField('For Student College ID', validators=[DataRequired()])
     status = SelectField('Status', choices = [(0, 'Arrived'), (1, 'Collected')], validators = [DataRequired()])
     submit = SubmitField('Enter Record')
@@ -80,7 +80,7 @@ class CouriersForm(FlaskForm):
 class UpdateAccountForm(FlaskForm):
     address = TextAreaField('Address', validators=[DataRequired(), Length(min=2, max=200)])
     phone = StringField('Contact', validators=[DataRequired(),Length(min=10, max=10), Regexp("^[0-9]*$", message="This field can only have digits.")])
-    email = StringField('Email', validators=[DataRequired(), Email()])
+    email = StringField('Email', validators=[DataRequired(), Email()], render_kw={'autofocus': True})
     password = PasswordField('Password', validators=[])
     confirm_password = PasswordField('Confirm Password', validators=[EqualTo('password')])
     submit = SubmitField('Update')
@@ -101,7 +101,7 @@ class CreateStudentForm(FlaskForm):
     city_choices = [('From Mumbai', 'From Mumbai'), ('Outside Mumbai', 'Outside Mumbai')]
     course_choices = [('Diploma', 'Diploma'), ('B.Tech', 'B.Tech'), ('M.Tech', 'M.Tech')]
     dept_choices = [('CS','Computer Science'), ('IT','Information Technology'), ('Electronics','Electronics')]
-    college_id = IntegerField('College ID', validators=[DataRequired(), NumberRange(min=170000000, max=209999999, message="Enter a valid college-id")])
+    college_id = IntegerField('College ID', validators=[DataRequired(), NumberRange(min=170000000, max=209999999, message="Enter a valid college-id")], render_kw={'autofocus': True})
     firstname = StringField('Firstname', validators=[DataRequired(), Length(min=2, max=20)])
     lastname = StringField('Lastname', validators=[DataRequired(), Length(min=2, max=20)])
     address = TextAreaField('Address', validators=[DataRequired(), Length(min=2, max=200)])
@@ -137,7 +137,7 @@ class UpdateStudentForm(FlaskForm):
     city_choices = [('From Mumbai', 'From Mumbai'), ('Outside Mumbai', 'Outside Mumbai')]
     course_choices = [('Diploma', 'Diploma'), ('B.Tech', 'B.Tech'), ('M.Tech', 'M.Tech')]
     dept_choices = [('CS','Computer Science'), ('IT','Information Technology'), ('Electronics','Electronics')]
-    college_id = IntegerField('College ID', validators=[DataRequired(), NumberRange(min=170000000, max=209999999, message="Enter a valid college-id")])
+    college_id = IntegerField('College ID', validators=[DataRequired(), NumberRange(min=170000000, max=209999999, message="Enter a valid college-id")], render_kw={'autofocus': True})
     firstname = StringField('Firstname', validators=[DataRequired(), Length(min=2, max=20)])
     lastname = StringField('Lastname', validators=[DataRequired(), Length(min=2, max=20)])
     address = TextAreaField('Address', validators=[DataRequired(), Length(min=2, max=200)])
@@ -148,13 +148,13 @@ class UpdateStudentForm(FlaskForm):
     submit = SubmitField('Update')
 
 class CreateMessStaffForm(FlaskForm):
-    college_id = IntegerField('College ID', validators=[DataRequired(), NumberRange(min=170000000, max=209999999, message="Enter a valid college-id")])
+    college_id = IntegerField('College ID', validators=[DataRequired(), NumberRange(min=170000000, max=209999999, message="Enter a valid college-id")], render_kw={'autofocus': True})
     firstname = StringField('Firstname', validators=[DataRequired(), Length(min=2, max=20)])
     lastname = StringField('Lastname', validators=[DataRequired(), Length(min=2, max=20)])
     phone = StringField('Contact', validators=[DataRequired(),Length(min=10, max=10), Regexp("^[0-9]*$", message="This field can only have digits.")])
     email = StringField('Email', validators=[DataRequired(), Email()])
     address = TextAreaField('Address', validators=[DataRequired(), Length(min=2, max=200)])
-    submit = SubmitField('Apply')
+    submit = SubmitField('Submit')
 
     def validate_email(self, email):
         application = Application.query.filter_by(email=email.data).first()
@@ -177,7 +177,7 @@ class CreateMessStaffForm(FlaskForm):
 
 class UpdateMessStaffForm(FlaskForm):
 
-    college_id = IntegerField('College ID', validators=[DataRequired(), NumberRange(min=170000000, max=209999999, message="Enter a valid college-id")])
+    college_id = IntegerField('College ID', validators=[DataRequired(), NumberRange(min=170000000, max=209999999, message="Enter a valid college-id")], render_kw={'autofocus': True})
     firstname = StringField('Firstname', validators=[DataRequired(), Length(min=2, max=20)])
     lastname = StringField('Lastname', validators=[DataRequired(), Length(min=2, max=20)])
     address = TextAreaField('Address', validators=[DataRequired(), Length(min=2, max=200)])
