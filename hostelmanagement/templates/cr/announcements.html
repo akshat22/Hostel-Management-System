@@ -1,41 +1,42 @@
 {% extends 'cr/cr_layout.html' %}
 {% block cr_announcements %}active{% endblock %}
 {% block cr_content %}
-<style>
-    .card{
-        padding: 2%;
-    }
-</style>
-    <div class="container" style="padding: 0 10%;">
-        {% if announcements %}
+<div class="oneGrid">
+        <a class="btn btn-primary create-btn" type="submit" href="{{ url_for('new_announcement') }}">Create Announcement</a>
+    </div>
+<div class="card-deck grid">
         {% for announcement in announcements %}
             <div class="card">
-                <a href="{{url_for('announcement_detail', announcement_id = announcement.id)}}"><h4>{{announcement.title}}</h4></a>
-                <p style="color: black">Author: {{announcement.author.firstname}} {{announcement.author.lastname}}</p>
-                <p style="color: black;">{{announcement.content}}</p>
-                <p style="float: right;">{{announcement.date_posted.strftime('%d-%m-%Y %H:%M:%S')}}</p>
-                <a href="{{ url_for('update_announcement', announcement_id=announcement.id) }}">
-                
-                    {% if user==announcement.author %}
-
-                <div class="row">
-                    <div class="col-md-2"><button class="btn btn-warning" type="submit">Update</button></div>
-                    <div class="col-md-2">
-                        <form action="{{ url_for('delete_announcement', announcement_id=announcement.id) }}" method="POST">
-                            <button class="btn btn-danger" type="submit">Delete</button>
-                        </form>
+                <div class="card-header">
+                    <div class="article-metadata">
+                        <a class="mr-2" href="#">{{announcement.author.firstname}} {{announcement.author.lastname}}</a>
+                        <small class="text-muted">{{announcement.date_posted.strftime('%d-%m-%Y')}}</small>   
                     </div>
                 </div>
-                {% endif %}
+                <div class="card-body">                    
+                    <h3 class="card-title">{{ announcement.title }}</h3>                    
+                    <p style="color: black;">{{announcement.content}}</p>
 
+                    {% if current_user==announcement.author %}
+
+                        <div class="row">
+                        <div class="col-md-2 offset-9">
+                            <a href="{{ url_for('update_announcement', announcement_id=announcement.id) }}" class="btn btn-warning">
+                                <i class="fas fa-edit text-white"></i>
+                            </a>
+                        </div>
+                        <div class="col-md-2" style="margin-left: -30px; margin-right: -30px;">
+                            <form action="{{ url_for('delete_announcement', announcement_id=announcement.id) }}" method="POST">
+                                <button class="btn btn-danger" type="submit"><i class="fas fa-trash"></i></button>
+                            </form>
+                        </div>
+                        </div>
+                
+                    {% endif %}
+                </div>
             </div>
-            <hr>
         {% endfor %}
-    {% else %}
-        <h2>No Announcements</h2>
-    {% endif %}
-
-    <a class="btn btn-primary" type="submit" href="{{ url_for('new_announcement') }}">Create Announcement</a>
+    </div>
 
     </div>
     

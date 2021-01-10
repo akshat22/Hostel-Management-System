@@ -440,7 +440,7 @@ def new_courier_record():
         courier = Courier(user = user, from_name = form.from_name.data, status = form.status.data)
         db.session.add(courier)
         db.session.commit()
-        
+        flash('Entry created', 'success')
         return redirect(url_for('couriers_records'))
     return render_template('guard/create_courier.html', form=form)
 

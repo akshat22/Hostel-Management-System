@@ -2,11 +2,11 @@
 {% block student_mess_menu %}active{% endblock student_mess_menu %}
 {% block student_content %}
 
-    <h1 style="text-align: center; padding-top: 20px;">Mess Menu</h1><br>
-    <div class="card-deck grid-mess">
+    <h4 class="mb-2 font-weight-bold" style="text-align: center; padding-top: 20px;">Mess Menu</h4>
+    <div class="card-deck grid-mess ml-2 mr-2">
 
         {% for item in messMenu %}
-            <div class="card-mess">
+            <div class="card-mess ml-1 mr-1">
                 <div class="card-header">
                     <h3 style="text-align: center;" class="card-title">{{ item.type_of_meal }}</h3>
                 </div>
